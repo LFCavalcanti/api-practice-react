@@ -1,0 +1,15 @@
+@import "./styleVariables.scss";
+
+.logo {
+    max-height: 100px;
+    max-width: 100px;
+    height: 100px;
+    width: 100px;
+}
+
+.titulo {
+    font-size: 50px;
+    font-weight: 800;
+    color: $blue-dark;
+    text-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
+}
