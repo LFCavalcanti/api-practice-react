@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {ReactComponent as Logo} from './assets/logo.svg';
+import {ReactComponent as Logo} from './src/assets/logo.svg';
 import styles from './app.module.scss'
 
 function App() {
