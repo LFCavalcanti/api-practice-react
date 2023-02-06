@@ -8,6 +8,7 @@ import Cep from './pages/Cep'
 import Cnpj from './pages/Cnpj'
 import Default from './pages/Default'
 import Ncm from './pages/Ncm'
+import './main.module.scss'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

@@ -5,19 +5,19 @@ import styles from './Menu.module.scss'
 export default function Menu() {
     const paginas = [
         {
-            label: 'Inicio',
+            label: 'HOME',
             to: '/'
         },
         {
-            label: 'Cep',
+            label: 'CEP',
             to: '/cep'
         },
         {
-            label: 'Bancos',
+            label: 'BANKS',
             to: '/bancos'
         },
         {
-            label: 'Cnpj',
+            label: 'CNPJ',
             to: '/cnpj'
         },
         {
@@ -27,19 +27,17 @@ export default function Menu() {
     ]
 
     return(
-        <>
-            <Logo id="logo" className={styles.logo} />
-            <p id="app-name" className={styles.titulo}>API-PRACTICE-REACT</p>
-            <nav>
-                <ul>
-                    {paginas.map((pagina)=>(
-                        <li key={pagina.label}>
-                            <Link to={pagina.to}>{pagina.label}</Link>
-                        </li>
-                    ))}
-                </ul>
+        <div className={styles.menu__container}>
+            <div className={styles.menu__header}>
+                <Logo id="logo" className={styles.menu__logo} />
+                <p id="app-name" className={styles.menu__titulo}>API - PRACTICE REACT</p>
+            </div>
+            <nav className={styles.menu__nav}>
+                {paginas.map((pagina)=>(
+                    <Link key={pagina.label} to={pagina.to} id='pageLink' className={styles.menu__item}>{pagina.label}</Link>
+                ))}
             </nav>
-        </>
+        </div>
     )
     
 }

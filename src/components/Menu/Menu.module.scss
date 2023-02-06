@@ -1,15 +1,54 @@
-@import "./styleVariables.scss";
+@import "/styleVariables.scss";
 
-.logo {
-    max-height: 100px;
-    max-width: 100px;
-    height: 100px;
-    width: 100px;
+.menu__container{
+    background-color: $grey-neutral;
+    height: 180px;
 }
 
-.titulo {
-    font-size: 50px;
+.menu__header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.menu__logo {
+    height: 85px;
+    width: 85px;
+    min-height: 50px;
+    min-width: 50px;
+    margin: 5px;
+}
+
+.menu__titulo {
+    font-size: 36px;
     font-weight: 800;
-    color: $blue-dark;
-    text-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
+    color: $baseOrange;
+    margin: 5px;
+}
+
+.menu__nav{
+    background-color: $baseOrange;
+    display: flex;
+    align-items: center;
+}
+
+.menu__item {
+    background-color: $baseOrange;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    color: $grey-neutral;
+    line-height: 30px;
+    height: 30px;
+    width: 100px;
+    padding: 5px;
+    cursor: pointer;
+    &:hover{
+        background-color: $lightOrage;
+    }
+    &:active{
+        background-color: $grey-dark;
+    }
 }
