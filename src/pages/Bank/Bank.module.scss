@@ -1,0 +1,117 @@
+@import "/styleVariables.scss";
+
+.bank__container{
+    background-color: $color-terciary;
+    margin-top: 10px;
+    padding: 10px;
+    height: 100%;
+}
+
+.bank__titulo{
+    color: $color-text-secondary;
+    font-family: $font-subtitle;
+    background-color: $color-contrast;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 5px;
+    padding: 5px;
+}
+
+.bank__form{
+    display: flex;
+}
+
+.bank__form__select{
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    height: 50px;
+    p{
+        font-size: 14px;
+        font-weight: 600;
+        color: $color-text;
+        margin-right: 10px;
+    }
+}
+
+.bank__form__select__btn{
+    all: unset;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $color-text;
+    text-align: center;
+    font-size: 12px;
+    padding: 2px;
+    height: 20px;
+    width: 70px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $color-primary;
+}
+
+.bank__form__select__btn_selected{
+    background-color: $color-primary;
+    color: $color-text-secondary;
+}
+
+.bank__form__inputFilter{
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    p{
+        font-size: 14px;
+        font-weight: 600;
+        color: $color-text;
+        margin-right: 10px;
+    }
+    button{
+        all: unset;
+        cursor: pointer;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $color-text;
+        text-align: center;
+        font-size: 12px;
+        padding: 2px;
+        height: 20px;
+        width: 70px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: $color-primary;
+        margin-left: 5px;
+        &:hover{
+            background-color: $color-secondary;
+        }
+        &:active{
+            background-color: $color-contrast;
+            color: $color-text-secondary;
+            border-color: $color-primary;
+        }
+    }
+    select {
+        width: 300px;
+        height: 20px;
+        padding: 2px;
+        option {
+            width: 300px;
+            height: 20px;
+            padding: 2px;
+        }
+    }
+    input {
+        width: 300px;
+        height: 20px;
+        padding: 2px;
+    }
+}
+
+.bank__display{
+    background-color: $color-terciary;
+    margin-top: 10px;
+    padding: 10px;
+    height: 100%;
+    border-color: $color-primary;
+    border-style: solid;
+    border-width: 1px;
+}
