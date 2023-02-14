@@ -12,6 +12,7 @@ Another choice was to use Vite instead of CRA to learn it's ins and outs.
 ![react](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react?color=important)
 ![react-dom](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react-dom?color=important)
 ![react-dom](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react-router-dom?color=important)
+![classnames](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/classnames?color=important)
 
 ### DEV - MAIN PACKAGES
 ![vite](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/dev/vite?color=green)
