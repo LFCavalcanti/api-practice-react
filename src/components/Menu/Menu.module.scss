@@ -1,7 +1,7 @@
 @import "/styleVariables.scss";
 
 .menu__container{
-    background-color: $grey-neutral;
+    background-color: $color-terciary;
     height: 180px;
 }
 
@@ -23,32 +23,35 @@
 .menu__titulo {
     font-size: 36px;
     font-weight: 800;
-    color: $baseOrange;
+    color: $color-primary;
+    font-family: $font-title;
     margin: 5px;
 }
 
 .menu__nav{
-    background-color: $baseOrange;
+    background-color: $color-primary;
     display: flex;
     align-items: center;
 }
 
 .menu__item {
-    background-color: $baseOrange;
+    background-color: $color-primary;
     text-align: center;
     font-size: 18px;
     font-weight: 400;
     text-decoration: none;
-    color: $grey-neutral;
+    color: $color-text-secondary;
     line-height: 30px;
     height: 30px;
     width: 100px;
     padding: 5px;
     cursor: pointer;
     &:hover{
-        background-color: $lightOrage;
+        background-color: $color-secondary;
+        color: $color-primary;
     }
     &:active{
-        background-color: $grey-dark;
+        background-color: $color-contrast;
+        color: $color-text-secondary;
     }
 }

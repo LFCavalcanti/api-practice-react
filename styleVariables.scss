@@ -1,22 +1,16 @@
-$blue-dark: #3D445C;
-$blue-light: #9CA7C3;
-$grey-neutral: #F3F0F9;
-$grey-dark: #63686F;
-$grey-darkest: #4a4a4a;
-$magenta-light: #ffb4af;
-$magenta-mid: #fa9088;
-$magenta-dark: #fa756c;
-$red-mid: #FBB7CB;
-$red-dark: #c62a2a;
-$orange-mid: #FEB06A;
-$yellow-mid: #FBD160;
-$yellow-light: #ffefc4;
-$beige-light: #FBF6F3;
-$green-light: #E2F8F0;
-$green-mid: #50DEBC;
-$green-dark: #03BBB0;
-$btnFontSize: 1.2em;
-$btnFontWeight: 600;
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-$baseOrange: #ff7e5f;
-$lightOrage: #feb47b;
+$color-primary: #497174;
+$color-secondary: #D6E4E5;
+$color-terciary: #EFF5F5;
+$color-contrast: #EB6440;
+$color-text: #4a4a4a;
+$color-text-secondary: $color-terciary;
+$color-error: #FBB7CB;
+$color-warning: #FBD160;
+$color-inform: #50DEBC;
+
+$font-title: 'Open Sans', sans-serif;
+$font-subtitle: 'Open Sans', sans-serif;
+$font-text: 'Varela Round', sans-serif;
