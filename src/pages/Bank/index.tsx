@@ -1,22 +1,63 @@
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import DisplayBank from '../../components/DisplayBank'
 import LoadingData from '../../components/LoadingData'
 import { iBank } from '../../interfaces/iBank'
 import styles from './Bank.module.scss'
 
 export default function Bank() {
-    const [searchType, setSearchType] = useState('nome')
     const [bankList, setBankList] = useState<iBank[]>([])
-    const [bank, setBank] = useState<iBank>()
+    const [searchList, setSearchList] = useState<iBank[]>([])
+    const [searchFilter, setSearchFilter] = useState<string>('')
+    const [selectedBanks, setSelectedBanks] = useState<iBank[]>([])
+
+    const loadBanks = () => {
+        fetch('https://brasilapi.com.br/api/banks/v1')
+        .then((response)=>response.json())
+        .then((convRes)=>{
+            let banks:iBank[] = []
+            convRes.forEach((item:iBank)=>{
+                let currBank = {
+                    ...item,
+                    searchWord: `${(item.code === null) ? 'N/A' : item.code.toString()} - ${item.name}`
+                }
+                banks.push(currBank)
+            })
+            setBankList(banks)
+        })
+        .catch((error)=>console.log(error))
+    }
+
+    const updateFilterList = () => {
+        if(searchFilter){
+            let filteredList = bankList.filter((bank) => bank.searchWord.includes(searchFilter.toUpperCase()))
+            setSearchList(filteredList)
+        } else {
+            setSearchList([])
+        }
+    }
+
+    const searchBank = (textFilter:string) => {
+        if(textFilter){
+            let filteredList = bankList.filter((bank) => bank.searchWord.includes(textFilter.toUpperCase()))
+            setSelectedBanks(filteredList)
+        } else {
+            setSelectedBanks([])
+        }
+    }
+
+    const handleDropList = (textFilter:string) => {
+        searchBank(textFilter)
+        setSearchList([])
+    }
 
     useEffect(()=>{
-
-        fetch('https://brasilapi.com.br/api/banks/v12')
-        .then((response)=>response.json())
-        .then((convRes)=>setBankList(convRes))
-        .catch((error)=>console.log(error))
-
+        loadBanks()
     },[])
+
+    useEffect(()=>{
+        updateFilterList()
+    },[searchFilter])
 
     if(!bankList.length){
         return (
@@ -24,48 +65,37 @@ export default function Bank() {
         )
     } else {
         return (
-            <div className={styles.bank__container}>
+            <main className={styles.bank__container}>
+
                 <h1 className={styles.bank__titulo}>BANCOS</h1>
-                <div className={styles.bank__form}>
-                    <div className={styles.bank__form__select}>
-                        <p>Buscar por:</p>
-                        <button
-                            onClick={() => setSearchType('nome')}
-                            className={classNames({
-                                [styles.bank__form__select__btn]:true,
-                                [styles.bank__form__select__btn_selected]: (searchType === 'nome')
-                            })
-                        }>
-                            Nome
-                        </button>
-                        <button
-                            onClick={() => setSearchType('codigo')}
-                            className={classNames({
-                                    [styles.bank__form__select__btn]:true,
-                                    [styles.bank__form__select__btn_selected]: (searchType === 'codigo')
-                                })
-                            }>
-                            Código
-                        </button>
+
+                <section className={styles.bank__form}>
+
+                    <label htmlFor='searchInput'>Busca:</label>
+
+                    <div className={styles.bank__form__searchElement}>
+                        <input 
+                            type='text'
+                            name='searchInput'
+                            placeholder='Código ou Nome do banco'
+                            value={searchFilter}
+                            onChange={(event)=>setSearchFilter(event.target.value)}>
+                        </input>
+                        <div className={classNames({[styles.bank__form__searchElement__select]:true, [styles.bank__form__searchElement__select__hidden]: searchList.length === 0})}>
+                            {(searchList.length > 0) && searchList.map(item => <p key={item.ispb} onClick={()=>handleDropList(item.searchWord)}>{item.searchWord}</p>)}
+                        </div>
                     </div>
-                    <div className={styles.bank__form__inputFilter}>
-                        <p>Digite:</p>
-                        {(searchType === 'nome') &&
-                            <select>
-                                <option>TESTE1</option>
-                                <option>TESTE2</option>
-                            </select>
-                        }
-                        {(searchType === 'codigo') &&
-                            <input type='number'></input>                            
-                        }
-                        <button>Buscar</button>
-                    </div>
-                </div>
-                <div className={styles.bank__display}>
-                    <span>PLACEHOLDER</span>
-                </div>
-            </div>
+                    
+                    <button onClick={()=>searchBank(searchFilter)}>Search</button>
+
+                </section>
+
+                {(selectedBanks.length === 0) && <p>Pesquise o banco desejado acima...</p>}
+                <section className={styles.bank__display}>
+                    {(selectedBanks.length > 0) && selectedBanks.map(bank => <DisplayBank bank={bank}/>)}
+                </section>
+
+            </main>
         )
 
     }

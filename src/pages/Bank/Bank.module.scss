@@ -19,99 +19,95 @@
 
 .bank__form{
     display: flex;
-}
-
-.bank__form__select{
-    display: flex;
     align-items: center;
-    padding: 0 10px 0 10px;
-    height: 50px;
-    p{
-        font-size: 14px;
+    justify-content: left;
+    padding: 5px;
+    gap: 5px;
+    label{
+        font-size: 16px;
         font-weight: 600;
         color: $color-text;
         margin-right: 10px;
     }
-}
+    &__searchElement{
+        width: 420px;
+        position: relative;
+        input{
+            width: 415px;
+            height: 30px;
+            padding: 5px;
+            font-size: 18px;
+            outline: none;
+            color: $color-text;
+            border: 1px solid $color-border-light;
+            &:hover{
+                border-color: $color-primary;
+            }
+            &:focus{
+                border-color: $color-contrast;
+            }
+        }
+        &__select{
+            position: absolute;
+            width: 415px;
+            border: 1px solid $color-border-light;
+            padding: 5px;
+            overflow-y: auto;
+            max-height: 300px;
+            background-color: white;
+            &__hidden{
+                display: none;
+            }
+            p{
+                color: $color-text;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 30px;
+                height: 30px;
+                margin: 0;
+                overflow: hidden;
+                &:hover{
+                    background-color: $color-secondary;
+                }
+            }
+                
+        }
 
-.bank__form__select__btn{
-    all: unset;
-    cursor: pointer;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: $color-text;
-    text-align: center;
-    font-size: 12px;
-    padding: 2px;
-    height: 20px;
-    width: 70px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: $color-primary;
-}
-
-.bank__form__select__btn_selected{
-    background-color: $color-primary;
-    color: $color-text-secondary;
-}
-
-.bank__form__inputFilter{
-    display: flex;
-    align-items: center;
-    padding: 0 10px 0 10px;
-    p{
-        font-size: 14px;
-        font-weight: 600;
-        color: $color-text;
-        margin-right: 10px;
     }
     button{
         all: unset;
         cursor: pointer;
         font-weight: 600;
         text-transform: uppercase;
-        color: $color-text;
+        color: $color-text-secondary;
+        background-color: $color-primary;
         text-align: center;
-        font-size: 12px;
-        padding: 2px;
-        height: 20px;
-        width: 70px;
-        border-style: solid;
-        border-width: 1px;
-        border-color: $color-primary;
-        margin-left: 5px;
+        font-size: 16px;
+        padding: 5px;
+        height: 30px;
+        border: 1px solid $color-primary;
+        //margin-left: 5px;
         &:hover{
             background-color: $color-secondary;
+            color: $color-primary;
+            border-color: $color-primary;
         }
         &:active{
             background-color: $color-contrast;
             color: $color-text-secondary;
-            border-color: $color-primary;
+            border-color: $color-contrast;
         }
-    }
-    select {
-        width: 300px;
-        height: 20px;
-        padding: 2px;
-        option {
-            width: 300px;
-            height: 20px;
-            padding: 2px;
-        }
-    }
-    input {
-        width: 300px;
-        height: 20px;
-        padding: 2px;
     }
 }
 
 .bank__display{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background-color: $color-terciary;
     margin-top: 10px;
     padding: 10px;
     height: 100%;
-    border-color: $color-primary;
-    border-style: solid;
-    border-width: 1px;
 }
