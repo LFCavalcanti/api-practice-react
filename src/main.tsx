@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import App from './App'
 import Menu from './components/Menu'
 import Bank from './pages/Bank'
 import Cep from './pages/Cep'
@@ -12,7 +11,6 @@ import './main.module.scss'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <main>
       <Router>
         <Menu />
         <Routes>
@@ -23,6 +21,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path='/ncm' element={<Ncm />} />
         </Routes>        
       </Router>
-    </main>
   </React.StrictMode>,
 )

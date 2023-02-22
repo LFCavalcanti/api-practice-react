@@ -27,7 +27,7 @@ export default function Menu() {
     ]
 
     return(
-        <div className={styles.menu__container}>
+        <header className={styles.menu__container}>
             <div className={styles.menu__header}>
                 <Logo id="logo" className={styles.menu__logo} />
                 <p id="app-name" className={styles.menu__titulo}>API - PRACTICE REACT</p>
@@ -37,7 +37,7 @@ export default function Menu() {
                     <Link key={pagina.label} to={pagina.to} id='pageLink' className={styles.menu__item}>{pagina.label}</Link>
                 ))}
             </nav>
-        </div>
+        </header>
     )
     
 }
