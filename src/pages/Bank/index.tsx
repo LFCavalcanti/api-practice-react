@@ -1,7 +1,8 @@
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import DisplayBank from '../../components/DisplayBank'
 import LoadingData from '../../components/LoadingData'
+import useMonitorClickOnElement from '../../hooks/useMonitorClickOnElement'
 import { iBank } from '../../interfaces/iBank'
 import styles from './Bank.module.scss'
 
@@ -10,6 +11,11 @@ export default function Bank() {
     const [searchList, setSearchList] = useState<iBank[]>([])
     const [searchFilter, setSearchFilter] = useState<string>('')
     const [selectedBanks, setSelectedBanks] = useState<iBank[]>([])
+    const dropDownRef = useRef<HTMLDivElement>(null)
+    const searchInputRef = useRef<HTMLInputElement>(null)
+
+    useMonitorClickOnElement(dropDownRef, ()=>setSearchList([]),true)
+    useMonitorClickOnElement(searchInputRef, ()=>updateFilterList(),false)
 
     const loadBanks = () => {
         fetch('https://brasilapi.com.br/api/banks/v1')
@@ -46,7 +52,7 @@ export default function Bank() {
         }
     }
 
-    const handleDropList = (textFilter:string) => {
+    const handleSearch = (textFilter:string) => {
         searchBank(textFilter)
         setSearchList([])
     }
@@ -77,22 +83,24 @@ export default function Bank() {
                         <input 
                             type='text'
                             name='searchInput'
+                            ref={searchInputRef}
                             placeholder='Código ou Nome do banco'
                             value={searchFilter}
-                            onChange={(event)=>setSearchFilter(event.target.value)}>
+                            onChange={(event)=>setSearchFilter(event.target.value)}
+                            autoComplete="off">
                         </input>
-                        <div className={classNames({[styles.bank__form__searchElement__select]:true, [styles.bank__form__searchElement__select__hidden]: searchList.length === 0})}>
-                            {(searchList.length > 0) && searchList.map(item => <p key={item.ispb} onClick={()=>handleDropList(item.searchWord)}>{item.searchWord}</p>)}
+                        <div ref={dropDownRef} className={classNames({[styles.bank__form__searchElement__select]:true, [styles.bank__form__searchElement__select__hidden]: searchList.length === 0})}>
+                            {(searchList.length > 0) && searchList.map(item => <p key={item.ispb} onClick={()=>handleSearch(item.searchWord)}>{item.searchWord}</p>)}
                         </div>
                     </div>
                     
-                    <button onClick={()=>searchBank(searchFilter)}>Search</button>
+                    <button onClick={()=>handleSearch(searchFilter)}>Search</button>
 
                 </section>
 
                 {(selectedBanks.length === 0) && <p>Pesquise o banco desejado acima...</p>}
                 <section className={styles.bank__display}>
-                    {(selectedBanks.length > 0) && selectedBanks.map(bank => <DisplayBank bank={bank}/>)}
+                    {(selectedBanks.length > 0) && selectedBanks.map(bank => <DisplayBank key={bank.ispb} bank={bank}/>)}
                 </section>
 
             </main>

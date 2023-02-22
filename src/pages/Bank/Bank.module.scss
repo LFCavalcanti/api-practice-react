@@ -11,7 +11,7 @@
     color: $color-text-secondary;
     font-family: $font-subtitle;
     background-color: $color-contrast;
-    font-size: 24px;
+    font-size: $font-size-title;
     font-weight: 600;
     margin: 5px;
     padding: 5px;
@@ -24,7 +24,7 @@
     padding: 5px;
     gap: 5px;
     label{
-        font-size: 16px;
+        font-size: $font-size-label;
         font-weight: 600;
         color: $color-text;
         margin-right: 10px;
@@ -36,7 +36,7 @@
             width: 415px;
             height: 30px;
             padding: 5px;
-            font-size: 18px;
+            font-size: $font-size-input;
             outline: none;
             color: $color-text;
             border: 1px solid $color-border-light;
@@ -61,7 +61,7 @@
             p{
                 color: $color-text;
                 font-weight: 500;
-                font-size: 14px;
+                font-size: $font-size-input;
                 line-height: 30px;
                 height: 30px;
                 margin: 0;
@@ -82,9 +82,10 @@
         color: $color-text-secondary;
         background-color: $color-primary;
         text-align: center;
-        font-size: 16px;
+        font-size: $font-size-btn-primary;
         padding: 5px;
         height: 30px;
+        width: 50px;
         border: 1px solid $color-primary;
         //margin-left: 5px;
         &:hover{

@@ -3,7 +3,7 @@
 .container{
     display: flex;
     flex-direction: column;
-    min-width: 605px;
+    min-width: 600px;
     //max-width: 100%;
     background-color: $color-secondary;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -17,38 +17,42 @@
     height: 40px;
     &__name{
         font-weight: 700;
-        font-size: 16px;
+        font-size: $font-size-label;
         color: $color-text;
         text-align: right;
         line-height: 30px;
         padding: 4px;
-        width: 200px;
+        min-width: 150px;
         margin: 0;
     }
     &__content{
         padding-left: 8px;
         font-weight: 600;
-        font-size: 16px;
+        font-size: $font-size-textField;
         color: $color-primary;
         text-align: left;
         overflow: hidden;
         background-color: white;
-        width: 300px;
+        flex-grow: 1;
+        //width: 100%;
         line-height: 30px;
         padding: 4px;
         margin: 0;
     }
     &__copyBtn{
         font-weight: 600;
-        font-size: 16px;
+        font-size: $font-size-btn-other;
         color: $color-primary;
         padding: 4px;
-        width: 80px;
+        min-width: 50px;
         border: none;
         background-color: $color-terciary;
         &:hover{
             background-color: $color-primary;
             color: $color-text-secondary;
         }
+    }
+    &__toolTip{
+        background-color: $color-secondary;
     }
 }
