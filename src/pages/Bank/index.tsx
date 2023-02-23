@@ -11,6 +11,7 @@ export default function Bank() {
     const [searchList, setSearchList] = useState<iBank[]>([])
     const [searchFilter, setSearchFilter] = useState<string>('')
     const [selectedBanks, setSelectedBanks] = useState<iBank[]>([])
+    const [connectionError, setConnectionError] = useState<string>('')
     const dropDownRef = useRef<HTMLDivElement>(null)
     const searchInputRef = useRef<HTMLInputElement>(null)
 
@@ -19,10 +20,13 @@ export default function Bank() {
 
     const loadBanks = () => {
         fetch('https://brasilapi.com.br/api/banks/v1')
-        .then((response)=>response.json())
-        .then((convRes)=>{
+        .then((response)=>{
+            if(response.status === 404) throw `URL: ${response.url} - NOT FOUND`
+            return response.json()
+        })
+        .then((response)=>{
             let banks:iBank[] = []
-            convRes.forEach((item:iBank)=>{
+            response.forEach((item:iBank)=>{
                 let currBank = {
                     ...item,
                     searchWord: `${(item.code === null) ? 'N/A' : item.code.toString()} - ${item.name}`
@@ -31,7 +35,10 @@ export default function Bank() {
             })
             setBankList(banks)
         })
-        .catch((error)=>console.log(error))
+        .catch((error)=>{
+            console.error(error)
+            setConnectionError(`${error}`)
+        })
     }
 
     const updateFilterList = () => {
@@ -67,7 +74,12 @@ export default function Bank() {
 
     if(!bankList.length){
         return (
-            <LoadingData />
+            <>
+                <LoadingData />
+                <div>
+                    {(connectionError) && <p className={styles.errorDisplay}>{connectionError}</p>}
+                </div>
+            </>
         )
     } else {
         return (
