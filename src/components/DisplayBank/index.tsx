@@ -7,10 +7,6 @@ interface DisplayProps {
 }
 
 export default function DisplayBank(props:DisplayProps){
-    const handleCopy = (text:string) => {
-        navigator.clipboard.writeText(text)
-        .then()
-    }
     return(
         <div className={styles.container}>
 
