@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+/*
 $color-primary: #497174;
 $color-secondary: #D6E4E5;
 $color-terciary: #EFF5F5;
@@ -9,6 +10,25 @@ $color-border-light: #c0bcbc;
 $color-border-dark: #4a4a4a;
 $color-text: #4a4a4a;
 $color-text-secondary: $color-terciary;
+$color-error: #FBB7CB;
+$color-warning: #FBD160;
+$color-inform: #50DEBC;
+*/
+
+//BOA POSSIBILIDADE
+
+$color-primary: #333652;
+$color-secondary: #90adc6;
+$color-terciary: #e9eaec;
+$color-light: #f3f3f5;
+$color-contrast: #e2bd28;
+
+
+$color-border-light: #c0bcbc;
+$color-border-dark: #4a4a4a;
+$color-text: #4a4a4a;
+$color-text-secondary: $color-terciary;
+$color-background-other: white;
 $color-error: #FBB7CB;
 $color-warning: #FBD160;
 $color-inform: #50DEBC;

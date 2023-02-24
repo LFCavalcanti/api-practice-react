@@ -8,7 +8,7 @@
 }
 
 .bank__titulo{
-    color: $color-text-secondary;
+    color: $color-text;
     font-family: $font-subtitle;
     background-color: $color-contrast;
     font-size: $font-size-title;
@@ -41,10 +41,10 @@
             color: $color-text;
             border: 1px solid $color-border-light;
             &:hover{
-                border-color: $color-primary;
+                border-color: $color-contrast;
             }
             &:focus{
-                border-color: $color-contrast;
+                border-color: $color-primary;
             }
         }
         &__select{
@@ -54,7 +54,7 @@
             padding: 5px;
             overflow-y: auto;
             max-height: 300px;
-            background-color: white;
+            background-color: $color-background-other;
             &__hidden{
                 display: none;
             }
