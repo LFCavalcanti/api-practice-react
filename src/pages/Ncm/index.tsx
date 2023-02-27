@@ -2,11 +2,12 @@ import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import DisplayNcm from '../../components/DisplayNcm'
 import LoadingData from '../../components/LoadingData'
+import useDebounce from '../../hooks/useDebounce'
 import useMonitorClickOnElement from '../../hooks/useMonitorClickOnElement'
 import { iNcm } from '../../interfaces/iNcm'
-import styles from './Bank.module.scss'
+import styles from './Ncm.module.scss'
 
-export default function Bank() {
+export default function Ncm() {
     const [ncmList, setNcmList] = useState<iNcm[]>([])
     const [searchList, setSearchList] = useState<iNcm[]>([])
     const [searchFilter, setSearchFilter] = useState<string>('')
@@ -18,22 +19,22 @@ export default function Bank() {
     useMonitorClickOnElement(dropDownRef, ()=>setSearchList([]),true)
     useMonitorClickOnElement(searchInputRef, ()=>updateFilterList(),false)
 
-    const loadBanks = () => {
+    const loadNcms = () => {
         fetch('https://brasilapi.com.br/api/ncm/v1')
         .then((response)=>{
             if(response.status === 404) throw `URL: ${response.url} - NOT FOUND`
             return response.json()
         })
         .then((response)=>{
-            let banks:iNcm[] = []
+            let ncms:iNcm[] = []
             response.forEach((item:iNcm)=>{
-                let currBank = {
+                let currNcm = {
                     ...item,
                     searchWord: `${item.codigo.toUpperCase()} - ${item.descricao.toUpperCase()}`
                 }
-                banks.push(currBank)
+                ncms.push(currNcm)
             })
-            setNcmList(banks)
+            setNcmList(ncms)
         })
         .catch((error)=>{
             console.error(error)
@@ -50,7 +51,14 @@ export default function Bank() {
         }
     }
 
-    const searchBank = (textFilter:string) => {
+    const debounceSearchFilter = useDebounce(updateFilterList, 2000)
+
+    const onInputSearchChange = (text:string) => {
+        setSearchFilter(text)
+        debounceSearchFilter()
+    }
+
+    const searchNcm = (textFilter:string) => {
         if(textFilter){
             let filteredList = ncmList.filter((ncm) => ncm.searchWord.includes(textFilter.toUpperCase()))
             setSelectedNcms(filteredList)
@@ -60,17 +68,20 @@ export default function Bank() {
     }
 
     const handleSearch = (textFilter:string) => {
-        searchBank(textFilter)
+        searchNcm(textFilter)
         setSearchList([])
     }
 
     useEffect(()=>{
-        loadBanks()
+        loadNcms()
     },[])
 
+    /*
     useEffect(()=>{
-        updateFilterList()
-    },[searchFilter])
+        debounceSearchFilter()
+        //Debouncer(updateFilterList, 1000)
+        //updateFilterList()
+    },[searchFilter])*/
 
     if(!ncmList.length){
         return (
@@ -98,7 +109,7 @@ export default function Bank() {
                             ref={searchInputRef}
                             placeholder='Código ou Nome do banco'
                             value={searchFilter}
-                            onChange={(event)=>setSearchFilter(event.target.value)}
+                            onChange={(event)=>onInputSearchChange(event.target.value)}
                             autoComplete="off">
                         </input>
                         <div ref={dropDownRef} className={classNames({[styles.form__searchElement__select]:true, [styles.form__searchElement__select__hidden]: searchList.length === 0})}>
