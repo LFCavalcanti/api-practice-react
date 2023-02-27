@@ -1,0 +1,60 @@
+@import "/styleVariables.scss";
+
+.container{
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    //max-width: 100%;
+    background-color: $color-light;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    //box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 10px;
+    gap: 16px;
+}
+
+.field{
+    display: flex;
+    height: 40px;
+    &__name{
+        font-weight: 700;
+        font-size: $font-size-label;
+        color: $color-text;
+        text-align: right;
+        line-height: 30px;
+        padding: 4px;
+        min-width: 150px;
+        margin: 0;
+    }
+    &__content{
+        padding-left: 8px;
+        font-weight: 600;
+        font-size: $font-size-textField;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+        text-align: left;
+        overflow: hidden;
+        background-color: $color-background-other;
+        flex-grow: 1;
+        //width: 100%;
+        line-height: 30px;
+        padding: 4px;
+        margin: 0;
+    }
+    &__copyBtn{
+        font-weight: 600;
+        font-size: $font-size-btn-other;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+        padding: 4px;
+        min-width: 50px;
+        //border: none;
+        background-color: white;
+        &:hover{
+            background-color: $color-primary;
+            color: $color-text-secondary;
+        }
+    }
+    &__toolTip{
+        background-color: $color-secondary;
+    }
+}
