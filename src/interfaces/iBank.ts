@@ -1,7 +1,7 @@
 export interface iBank {
     ispb: string,
     name: string,
-    code: number,
+    code: string,
     fullName: string,
     searchWord: string
 }

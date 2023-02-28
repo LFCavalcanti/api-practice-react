@@ -1,5 +1,5 @@
 
-import styles from './DisplayNcm.module.scss'
+import styles from './DisplayCard.module.scss'
 import { Tooltip } from 'react-tooltip'
 import { iInfoList } from '../../interfaces/iInfoList'
 
@@ -16,7 +16,7 @@ export default function DisplayCard({infoList, payload}:DisplayProps){
             {infoList.map((info)=>{
                 const value = (info.attribute in payload) ? payload[info.attribute as keyof typeof payload] : 'ERRO'
                 return (
-                    <div className={styles.field}>
+                    <div key={info.label} className={styles.field}>
                         <p className={styles.field__name}>{info.label}</p>
                         <p className={styles.field__content}>{value}</p>
                         <button

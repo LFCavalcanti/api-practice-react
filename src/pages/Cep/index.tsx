@@ -1,14 +1,24 @@
 
 import axios from 'axios'
 import { useState } from 'react'
+import DisplayCard from '../../components/DisplayCard'
 import DisplayCep from '../../components/DisplayCep'
 import { iCep } from '../../interfaces/iCep'
+import { iInfoList } from '../../interfaces/iInfoList'
 import styles from './Cep.module.scss'
 
 export default function Cep() {
 
     const [cep, setCep] = useState<string>('')
     const [cepInformation, setCepInformation] = useState<iCep>()
+
+    const infoList:iInfoList[] = [
+        {attribute: 'cep', label: 'CODIGO:'},
+        {attribute: 'state', label: 'ESTADO:'},
+        {attribute: 'city', label: 'CIDADE:'},
+        {attribute: 'neighborhood', label: 'BAIRRO:'},
+        {attribute: 'street', label: 'LOGRADOURO:'}
+    ]
 
     const valDigitCep = (newCep:string) => {
         if(newCep) setCep(newCep)
@@ -39,7 +49,7 @@ export default function Cep() {
                 <button onClick={()=>searchCep(cep)}>SEARCH</button>
             </section>
             <section className={styles.cep__display}>
-                {(cepInformation) && <DisplayCep cepInformation={cepInformation}></DisplayCep>}
+                {(cepInformation) && <DisplayCard infoList={infoList} payload={cepInformation} />}
             </section>
         </main>
     )

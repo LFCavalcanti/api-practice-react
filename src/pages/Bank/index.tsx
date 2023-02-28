@@ -1,9 +1,11 @@
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import DisplayBank from '../../components/DisplayBank'
+import DisplayCard from '../../components/DisplayCard'
 import LoadingData from '../../components/LoadingData'
 import useMonitorClickOnElement from '../../hooks/useMonitorClickOnElement'
 import { iBank } from '../../interfaces/iBank'
+import { iInfoList } from '../../interfaces/iInfoList'
 import styles from './Bank.module.scss'
 
 export default function Bank() {
@@ -18,6 +20,13 @@ export default function Bank() {
     useMonitorClickOnElement(dropDownRef, ()=>setSearchList([]),true)
     useMonitorClickOnElement(searchInputRef, ()=>updateFilterList(),false)
 
+    const infoList:iInfoList[] = [
+        {attribute:'fullName', label: 'NOME COMPLETO:'},
+        {attribute:'name', label: 'NOME:'},
+        {attribute:'code', label: 'CÓDIGO:'},
+        {attribute:'ispb', label: 'ISPB:'}
+    ]
+
     const loadBanks = () => {
         fetch('https://brasilapi.com.br/api/banks/v1')
         .then((response)=>{
@@ -28,7 +37,10 @@ export default function Bank() {
             let banks:iBank[] = []
             response.forEach((item:iBank)=>{
                 let currBank = {
-                    ...item,
+                    ispb: item.ispb,
+                    name: item.name,
+                    code: `${item.code}`,
+                    fullName: item.fullName,
                     searchWord: `${(item.code === null) ? 'N/A' : item.code.toString()} - ${item.name}`
                 }
                 banks.push(currBank)
@@ -112,7 +124,7 @@ export default function Bank() {
 
                 {(selectedBanks.length === 0) && <p>Pesquise o banco desejado acima...</p>}
                 <section className={styles.bank__display}>
-                    {(selectedBanks.length > 0) && selectedBanks.map(bank => <DisplayBank key={bank.ispb} bank={bank}/>)}
+                    {(selectedBanks.length > 0) && selectedBanks.map(bank => <DisplayCard key={bank.ispb} infoList={infoList} payload={bank}/>)}
                 </section>
 
             </main>
