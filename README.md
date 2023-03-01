@@ -4,6 +4,9 @@
 This is a personal project to practice React, using APIs like Brasil-API with React and React Router to build a web interface for obtaining information using Fetch and Axios.
 Another choice was to use Vite instead of CRA to learn it's ins and outs.
 
+
+[Checkout the BrasilAPI project](https://github.com/BrasilAPI/BrasilAPI "BrasilAPI")
+
 **Feel free to download the project**
 
 ## DEPENDENCIES
