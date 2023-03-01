@@ -1,0 +1,103 @@
+@import "/styleVariables.scss";
+
+.container{
+    background-color: $color-terciary;
+    margin-top: 10px;
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.titulo{
+    color: $color-text;
+    font-family: $font-subtitle;
+    background-color: $color-contrast;
+    font-size: $font-size-title;
+    font-weight: 600;
+    margin: 5px;
+    padding: 5px;
+}
+.information{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    &__logoProject{
+        height: 85px;
+        width: 85px;
+        margin: 5px;
+    }
+    &__text{
+        max-width: 400px;
+        padding: 10px;
+        h2{
+            font-family: $font-title;
+            font-weight: 700;
+            font-size: $font-size-label;
+            color: $color-primary;
+            border-bottom: 2px solid rgb(51, 54, 82, 0.5);
+        }
+        p{
+            color: $color-text;
+            font-size: $font-size-textField;
+        }
+        strong{
+            color: $color-text;
+            font-size: $font-size-textField;
+            font-weight: 700;
+        }
+    }
+}
+
+.brasilApi{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    &__logo{
+        height: 50px;
+        width: 170px;
+        margin: 5px;
+    }
+    &__text{
+        max-width: 400px;
+        padding: 10px;
+        h2{
+            font-family: $font-title;
+            font-weight: 700;
+            font-size: $font-size-label;
+            color: $color-primary;
+            border-bottom: 2px solid rgb(51, 54, 82, 0.5);
+        }
+        p{
+            color: $color-text;
+            font-weight: 600;
+            font-size: $font-size-textField;
+        }
+        strong{
+            color: $color-text;
+            font-size: $font-size-textField;
+            font-weight: 700;
+        }
+        &__awesome{
+            color: $color-text;
+            font-size: $font-size-textField;
+            font-weight: 700;
+            text-align: center;
+            width: 100px;
+            padding: 5px;
+            background-color: $color-inform;
+        }
+        a{
+            text-decoration: none;
+            color: $color-primary;
+            border-bottom: 2px solid rgb(144, 173, 198, 0.5);
+            cursor: pointer;
+            &:hover{
+                background-color: $color-secondary;
+            }
+        }
+    }
+}
