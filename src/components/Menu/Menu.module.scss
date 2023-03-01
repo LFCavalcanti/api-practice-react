@@ -49,6 +49,7 @@
     &:hover{
         background-color: $color-secondary;
         color: $color-primary;
+        transition: 0.3s;
     }
     &:active{
         background-color: $color-contrast;
