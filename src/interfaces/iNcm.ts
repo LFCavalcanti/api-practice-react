@@ -1,4 +1,5 @@
 export interface iNcm{
+    uniqueId: string,
     codigo: string,
     descricao: string,
     data_inicio: string,

@@ -1,26 +1,16 @@
-import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
-import DisplayNcm from '../../components/DisplayNcm'
 import LoadingData from '../../components/LoadingData'
+import SearchInputList from '../../components/SearchInputList'
 import ConvertDateFromISO from '../../helpers/ConvertDateFromISO'
-import useDebounce from '../../hooks/useDebounce'
-import useMonitorClickOnElement from '../../hooks/useMonitorClickOnElement'
 import { iInfoList } from '../../interfaces/iInfoList'
 import { iNcm } from '../../interfaces/iNcm'
 import styles from './Ncm.module.scss'
 
 export default function Ncm() {
     const [ncmList, setNcmList] = useState<iNcm[]>([])
-    const [searchList, setSearchList] = useState<iNcm[]>([])
-    const [searchFilter, setSearchFilter] = useState<string>('')
     const [selectedNcms, setSelectedNcms] = useState<iNcm[]>([])
     const [connectionError, setConnectionError] = useState<string>('')
-    const dropDownRef = useRef<HTMLDivElement>(null)
-    const searchInputRef = useRef<HTMLInputElement>(null)
-
-    useMonitorClickOnElement(dropDownRef, ()=>setSearchList([]),true)
-    useMonitorClickOnElement(searchInputRef, ()=>updateFilterList(),false)
 
     const infoList:iInfoList[] = [
         {attribute: 'codigo', label: 'CÓDIGO:'},
@@ -42,6 +32,7 @@ export default function Ncm() {
             let ncms:iNcm[] = []
             response.forEach((item:iNcm)=>{
                 let currNcm = {
+                    uniqueId: item.codigo,
                     codigo: item.codigo,
                     descricao: item.descricao,
                     data_inicio: ConvertDateFromISO(item.data_inicio),
@@ -61,22 +52,6 @@ export default function Ncm() {
         })
     }
 
-    const updateFilterList = () => {
-        if(searchFilter){
-            let filteredList = ncmList.filter((ncm) => ncm.searchWord.includes(searchFilter.toUpperCase()))
-            setSearchList(filteredList)
-        } else {
-            setSearchList([])
-        }
-    }
-
-    const debounceSearchFilter = useDebounce(updateFilterList, 2000)
-
-    const onInputSearchChange = (text:string) => {
-        setSearchFilter(text)
-        debounceSearchFilter()
-    }
-
     const searchNcm = (textFilter:string) => {
         if(textFilter){
             let filteredList = ncmList.filter((ncm) => ncm.searchWord.includes(textFilter.toUpperCase()))
@@ -84,11 +59,6 @@ export default function Ncm() {
         } else {
             setSelectedNcms([])
         }
-    }
-
-    const handleSearch = (textFilter:string) => {
-        searchNcm(textFilter)
-        setSearchList([])
     }
 
     useEffect(()=>{
@@ -110,29 +80,8 @@ export default function Ncm() {
 
                 <h1 className={styles.titulo}>NCM</h1>
 
-                <section className={styles.form}>
-
-                    <label htmlFor='searchInput'>Busca:</label>
-
-                    <div className={styles.form__searchElement}>
-                        <input 
-                            type='text'
-                            name='searchInput'
-                            ref={searchInputRef}
-                            placeholder='Código ou Nome do banco'
-                            value={searchFilter}
-                            onChange={(event)=>onInputSearchChange(event.target.value)}
-                            autoComplete="off">
-                        </input>
-                        <div ref={dropDownRef} className={classNames({[styles.form__searchElement__select]:true, [styles.form__searchElement__select__hidden]: searchList.length === 0})}>
-                            {(searchList.length > 0) && searchList.map(item => <p key={item.codigo} onClick={()=>handleSearch(item.searchWord)}>{item.searchWord}</p>)}
-                        </div>
-                    </div>
-                    
-                    <button onClick={()=>handleSearch(searchFilter)}>Search</button>
-
-                </section>
-
+                <SearchInputList dataList={ncmList} selectAction={searchNcm} placeHolderTxt='Código ou Descrição do NCM desejado'/>
+                
                 {(selectedNcms.length === 0) && <p>Pesquise o NCM desejado acima...</p>}
                 <section className={styles.display}>
                     {(selectedNcms.length > 0) && selectedNcms.map(ncm => <DisplayCard key={ncm.codigo} infoList={infoList} payload={ncm}/>)}

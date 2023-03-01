@@ -1,4 +1,5 @@
 export interface iBank {
+    uniqueId: string,
     ispb: string,
     name: string,
     code: string,

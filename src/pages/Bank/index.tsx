@@ -1,24 +1,15 @@
-import classNames from 'classnames'
-import { useEffect, useRef, useState } from 'react'
-import DisplayBank from '../../components/DisplayBank'
+import { useEffect, useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
 import LoadingData from '../../components/LoadingData'
-import useMonitorClickOnElement from '../../hooks/useMonitorClickOnElement'
+import SearchInputList from '../../components/SearchInputList'
 import { iBank } from '../../interfaces/iBank'
 import { iInfoList } from '../../interfaces/iInfoList'
 import styles from './Bank.module.scss'
 
 export default function Bank() {
     const [bankList, setBankList] = useState<iBank[]>([])
-    const [searchList, setSearchList] = useState<iBank[]>([])
-    const [searchFilter, setSearchFilter] = useState<string>('')
     const [selectedBanks, setSelectedBanks] = useState<iBank[]>([])
     const [connectionError, setConnectionError] = useState<string>('')
-    const dropDownRef = useRef<HTMLDivElement>(null)
-    const searchInputRef = useRef<HTMLInputElement>(null)
-
-    useMonitorClickOnElement(dropDownRef, ()=>setSearchList([]),true)
-    useMonitorClickOnElement(searchInputRef, ()=>updateFilterList(),false)
 
     const infoList:iInfoList[] = [
         {attribute:'fullName', label: 'NOME COMPLETO:'},
@@ -37,6 +28,7 @@ export default function Bank() {
             let banks:iBank[] = []
             response.forEach((item:iBank)=>{
                 let currBank = {
+                    uniqueId: item.ispb,
                     ispb: item.ispb,
                     name: item.name,
                     code: `${item.code}`,
@@ -53,15 +45,6 @@ export default function Bank() {
         })
     }
 
-    const updateFilterList = () => {
-        if(searchFilter){
-            let filteredList = bankList.filter((bank) => bank.searchWord.includes(searchFilter.toUpperCase()))
-            setSearchList(filteredList)
-        } else {
-            setSearchList([])
-        }
-    }
-
     const searchBank = (textFilter:string) => {
         if(textFilter){
             let filteredList = bankList.filter((bank) => bank.searchWord.includes(textFilter.toUpperCase()))
@@ -71,18 +54,9 @@ export default function Bank() {
         }
     }
 
-    const handleSearch = (textFilter:string) => {
-        searchBank(textFilter)
-        setSearchList([])
-    }
-
     useEffect(()=>{
         loadBanks()
     },[])
-
-    useEffect(()=>{
-        updateFilterList()
-    },[searchFilter])
 
     if(!bankList.length){
         return (
@@ -99,28 +73,7 @@ export default function Bank() {
 
                 <h1 className={styles.bank__titulo}>BANCOS</h1>
 
-                <section className={styles.bank__form}>
-
-                    <label htmlFor='searchInput'>Busca:</label>
-
-                    <div className={styles.bank__form__searchElement}>
-                        <input 
-                            type='text'
-                            name='searchInput'
-                            ref={searchInputRef}
-                            placeholder='Código ou Nome do banco'
-                            value={searchFilter}
-                            onChange={(event)=>setSearchFilter(event.target.value)}
-                            autoComplete="off">
-                        </input>
-                        <div ref={dropDownRef} className={classNames({[styles.bank__form__searchElement__select]:true, [styles.bank__form__searchElement__select__hidden]: searchList.length === 0})}>
-                            {(searchList.length > 0) && searchList.map(item => <p key={item.ispb} onClick={()=>handleSearch(item.searchWord)}>{item.searchWord}</p>)}
-                        </div>
-                    </div>
-                    
-                    <button onClick={()=>handleSearch(searchFilter)}>Search</button>
-
-                </section>
+                <SearchInputList dataList={bankList} selectAction={searchBank} placeHolderTxt={'Código ou Nome do banco'} />
 
                 {(selectedBanks.length === 0) && <p>Pesquise o banco desejado acima...</p>}
                 <section className={styles.bank__display}>
