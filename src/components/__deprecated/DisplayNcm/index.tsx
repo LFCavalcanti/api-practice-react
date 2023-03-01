@@ -1,8 +1,8 @@
 
 import styles from './DisplayNcm.module.scss'
 import { Tooltip } from 'react-tooltip'
-import { iNcm } from '../../interfaces/iNcm'
-import ConvertDateFromISO from '../../helpers/ConvertDateFromISO'
+import { iNcm } from '../../../interfaces/iNcm'
+import ConvertDateFromISO from '../../../helpers/ConvertDateFromISO'
 
 interface DisplayProps {
     ncm: iNcm

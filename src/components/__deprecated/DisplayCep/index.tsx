@@ -1,5 +1,5 @@
 import { Tooltip } from 'react-tooltip';
-import { iCep } from '../../interfaces/iCep';
+import { iCep } from '../../../interfaces/iCep';
 import styles from './DisplayCep.module.scss';
 
 interface CepProps {

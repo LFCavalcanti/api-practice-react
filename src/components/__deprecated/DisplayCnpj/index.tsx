@@ -1,5 +1,5 @@
 import { Tooltip } from 'react-tooltip';
-import { iCnpj } from '../../interfaces/iCnpj';
+import { iCnpj } from '../../../interfaces/iCnpj';
 import styles from './DisplayCnpj.module.scss';
 
 interface CepProps {
@@ -7,10 +7,11 @@ interface CepProps {
 }
 
 export default function DisplayCnpj(props:CepProps){
-
+/*
     const id_filial = (props.cnpjInformation.identificador_matriz_filial) ? props.cnpjInformation.identificador_matriz_filial.toString() : ''
     const desc_filial = (props.cnpjInformation.descricao_matriz_filial) ? props.cnpjInformation.descricao_matriz_filial : ''
-    const mat_filial = `${id_filial} - ${desc_filial}`
+    const mat_filial = `${id_filial} - ${desc_filial}`*/
+    const mat_filial = ''
     const cep = props.cnpjInformation.cep.toString()
     const codMun = props.cnpjInformation.codigo_municipio.toString()
     const natJuridica = props.cnpjInformation.codigo_natureza_juridica.toString()

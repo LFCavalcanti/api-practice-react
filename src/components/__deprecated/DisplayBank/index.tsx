@@ -1,4 +1,4 @@
-import { iBank } from '../../interfaces/iBank'
+import { iBank } from '../../../interfaces/iBank'
 import styles from './DisplayBank.module.scss'
 import { Tooltip } from 'react-tooltip'
 
