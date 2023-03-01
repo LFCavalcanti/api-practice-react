@@ -20,6 +20,7 @@ export default function Cep() {
     ]
 
     const searchCep = (cepToSearch:string) => {
+        cepToSearch = cepToSearch.replace(/[^\d]+/g,'')
         if(cepInformation) setCepInformation(undefined)
         axios.get(`https://brasilapi.com.br/api/cep/v2/${cepToSearch}`)
         .then((response)=>{
@@ -28,13 +29,21 @@ export default function Cep() {
         .catch((error)=>console.error(error))
     }
 
+    const validateCep = (cnpj:string) => {
+
+        const regExWithExtra = new RegExp(/([\d]{1,2}\.[\d]{3}-[\d]{3})|([\d]{4,5}-[\d]{3})/g)
+        const regExOnlyNum = new RegExp(/[\d]{7,8}/g)
+        return (regExWithExtra.test(cnpj) || regExOnlyNum.test(cnpj))
+
+    }
+
     return (
         
         <main className={styles.cep__container}>
 
             <h1 className={styles.cep__titulo}>CEP</h1>
             
-            <SearchInputTxt  placeHolder='Numero do CEP que deseja buscar' onClickCallBack={searchCep}/>
+            <SearchInputTxt  placeHolder='Numero do CEP que deseja buscar' onClickCallBack={searchCep} validationFunc={validateCep} />
 
             <section className={styles.cep__display}>
                 {(cepInformation) && <DisplayCard infoList={infoList} payload={cepInformation} />}

@@ -38,6 +38,7 @@ export default function Cnpj() {
     ]
 
     const searchCnpj = (cnpjToSearch:string) => {
+        cnpjToSearch = cnpjToSearch.replace(/[^\d]+/g,'')
         if(cnpjInformation) setCnpjInformation(undefined)
         axios.get(`https://brasilapi.com.br/api/cnpj/v1/${cnpjToSearch}`)
         .then((response)=>{
@@ -73,12 +74,20 @@ export default function Cnpj() {
         .catch((error)=>console.error(error))
     }
 
+    const validateCnpj = (cnpj:string) => {
+
+        const regExWithExtra = new RegExp(/[\d]{1,2}\.[\d]{3}\.[\d]{3}\/[\d]{4}[-]{1}[\d]{2}/g)
+        const regExOnlyNum = new RegExp(/[\d]{13,14}/g)
+        return (regExWithExtra.test(cnpj) || regExOnlyNum.test(cnpj))
+
+    }
+
     return (
         <main className={styles.cnpj__container}>
 
             <h1 className={styles.cnpj__titulo}>CNPJ</h1>
 
-            <SearchInputTxt placeHolder='Numero do CNPJ que deseja buscar' onClickCallBack={searchCnpj} />
+            <SearchInputTxt placeHolder='Numero do CNPJ que deseja buscar' onClickCallBack={searchCnpj} validationFunc={validateCnpj} />
 
             <section className={styles.cnpj__display}>
                 {(cnpjInformation) && <DisplayCard infoList={infoList} payload={cnpjInformation}/>}

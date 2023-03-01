@@ -39,6 +39,7 @@ export default function SearchInputTxt(
                 name='searchInput'
                 placeholder={placeHolder}
                 value={text}
+                className={(!validInput) ? styles.invalidInput : ''}
                 onChange={(event)=>onChangeValidation(event.target.value)}
                 >
             </input>
