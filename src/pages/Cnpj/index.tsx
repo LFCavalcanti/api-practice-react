@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
-import DisplayCnpj from '../../components/DisplayCnpj'
+import SearchInputTxt from '../../components/SearchInputTxt'
 import ConvertDateFromISO from '../../helpers/ConvertDateFromISO'
 import { iCnpj } from '../../interfaces/iCnpj'
 import { iInfoList } from '../../interfaces/iInfoList'
@@ -10,7 +10,6 @@ import styles from './Cnpj.module.scss'
 
 export default function Cnpj() {
 
-    const [cnpj, setCnpj] = useState<string>('')
     const [cnpjInformation, setCnpjInformation] = useState<iCnpj>()
 
     const infoList:iInfoList[] = [
@@ -37,10 +36,6 @@ export default function Cnpj() {
         {attribute: 'ddd_telefone_1', label: 'TELEFONE 1:'},
         {attribute: 'ddd_telefone_2', label: 'TELEFONE 2:'},
     ]
-
-    const valDigitCnpj = (newCnpj:string) => {
-        if(newCnpj) setCnpj(newCnpj)
-    }
 
     const searchCnpj = (cnpjToSearch:string) => {
         if(cnpjInformation) setCnpjInformation(undefined)
@@ -75,24 +70,16 @@ export default function Cnpj() {
             }
             setCnpjInformation(cnpjInfo)
         })
-        .catch((error)=>console.log(error))
+        .catch((error)=>console.error(error))
     }
 
     return (
         <main className={styles.cnpj__container}>
+
             <h1 className={styles.cnpj__titulo}>CNPJ</h1>
-            <section className={styles.cnpj__search}>
-                <label htmlFor='searchInput'>Busca:</label>
-                <input
-                    type='text'
-                    name='searchInput'
-                    placeholder='Numero do CNPJ que deseja buscar'
-                    value={cnpj}
-                    onChange={(event)=>valDigitCnpj(event.target.value)}
-                    >
-                </input>
-                <button onClick={()=>searchCnpj(cnpj)}>SEARCH</button>
-            </section>
+
+            <SearchInputTxt placeHolder='Numero do CNPJ que deseja buscar' onClickCallBack={searchCnpj} />
+
             <section className={styles.cnpj__display}>
                 {(cnpjInformation) && <DisplayCard infoList={infoList} payload={cnpjInformation}/>}
             </section>
