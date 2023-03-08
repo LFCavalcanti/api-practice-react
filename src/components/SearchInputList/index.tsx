@@ -22,9 +22,9 @@ export default function SearchInputList({dataList, selectAction, placeHolderTxt}
     const dropDownRef = useRef<HTMLDivElement>(null)
     const searchInputRef = useRef<HTMLInputElement>(null)
 
-    const updateFilterList = () => {
-        if(searchFilter){
-            let filteredList = dataList.filter((item) => item.searchWord.includes(searchFilter.toUpperCase()))
+    const updateFilterList = (text:string) => {
+        if(text){
+            let filteredList = dataList.filter((item) => item.searchWord.includes(text.toUpperCase()))
             setSearchList(filteredList)
         } else {
             setSearchList([])
@@ -32,7 +32,7 @@ export default function SearchInputList({dataList, selectAction, placeHolderTxt}
     }
 
     useMonitorClickOnElement(dropDownRef, ()=>setSearchList([]),true)
-    useMonitorClickOnElement(searchInputRef, ()=>updateFilterList(),false)
+    useMonitorClickOnElement(searchInputRef, ()=>updateFilterList((searchInputRef.current) ? searchInputRef.current.value : ''),false)
 
     const handleSearch = (textFilter:string) => {
         selectAction(textFilter)
@@ -43,7 +43,7 @@ export default function SearchInputList({dataList, selectAction, placeHolderTxt}
 
     const onInputSearchChange = (text:string) => {
         setSearchFilter(text)
-        debounceSearchFilter()
+        debounceSearchFilter(text)
     }
 
 
