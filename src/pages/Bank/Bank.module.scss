@@ -20,8 +20,8 @@
 .bank__display{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: flex-start;
     gap: 10px;
     background-color: $color-terciary;
     margin-top: 10px;
