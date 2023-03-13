@@ -21,23 +21,25 @@ export default function SearchInputList({dataList, selectAction, placeHolderTxt}
     const [searchList, setSearchList] = useState<iDataItem[]>([])
     const dropDownRef = useRef<HTMLDivElement>(null)
     const searchInputRef = useRef<HTMLInputElement>(null)
+    const MAX_LIST_SIZE = 200
 
-    const updateFilterList = (text:string) => {
+    const updateFilterList = (text?:string) => {
         if(text){
             let filteredList = dataList.filter((item) => item.searchWord.includes(text.toUpperCase()))
+            if(filteredList.length > MAX_LIST_SIZE) filteredList = filteredList.slice(1, MAX_LIST_SIZE + 1)
             setSearchList(filteredList)
         } else {
             setSearchList([])
         }
     }
 
-    useMonitorClickOnElement(dropDownRef, ()=>setSearchList([]),true)
-    useMonitorClickOnElement(searchInputRef, ()=>updateFilterList((searchInputRef.current) ? searchInputRef.current.value : ''),false)
-
+    
     const handleSearch = (textFilter:string) => {
         selectAction(textFilter)
         setSearchList([])
     }
+
+    useMonitorClickOnElement(dropDownRef, updateFilterList,true)
 
     const debounceSearchFilter = useDebounce(updateFilterList, 1000)
 
@@ -46,13 +48,12 @@ export default function SearchInputList({dataList, selectAction, placeHolderTxt}
         debounceSearchFilter(text)
     }
 
-
     return(
         <section className={styles.form}>
 
             <label htmlFor='searchInput'>Busca:</label>
 
-            <div className={styles.form__searchElement}>
+            <div ref={dropDownRef} className={styles.form__searchElement}>
                 <input 
                     type='text'
                     name='searchInput'
@@ -60,9 +61,10 @@ export default function SearchInputList({dataList, selectAction, placeHolderTxt}
                     placeholder={placeHolderTxt}
                     value={searchFilter}
                     onChange={(event)=>onInputSearchChange(event.target.value)}
+                    onFocus={(event)=>updateFilterList(event.target.value)}
                     autoComplete="off">
                 </input>
-                <div ref={dropDownRef} className={classNames({[styles.form__searchElement__select]:true, [styles.form__searchElement__select__hidden]: searchList.length === 0})}>
+                <div className={classNames({[styles.form__searchElement__select]:true, [styles.form__searchElement__select__hidden]: searchList.length === 0})}>
                     {(searchList.length > 0) && searchList.map(item => <p key={item.uniqueId} onClick={()=>handleSearch(item.searchWord)}>{item.searchWord}</p>)}
                 </div>
             </div>

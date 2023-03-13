@@ -16,9 +16,9 @@ export default function useMonitorClickOnElement(ref:React.MutableRefObject<any>
                 callBackFn()
             }
         }
-        document.addEventListener("mousedown", handleClick)
+        window.addEventListener("mousedown", handleClick)
         return () => {
-            document.removeEventListener("mousedown", handleClick)
+            window.removeEventListener("mousedown", handleClick)
         }
 
     },[ref])
