@@ -55,4 +55,10 @@
         background-color: $color-contrast;
         color: $color-text-secondary;
     }
+    &__current {
+        margin-bottom: -6px;
+        border-bottom: 6px solid $color-contrast;
+        transition: transform  1s;
+    }
 }
+
