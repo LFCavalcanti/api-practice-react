@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
-import DisplayCard from '../../components/DisplayCard'
+import DisplayOutlet from '../../components/DisplayOutlet'
 import LoadingData from '../../components/LoadingData'
 import SearchInputList from '../../components/SearchInputList'
+import UIConstants from '../../global/UiConstants'
 import ConvertDateFromISO from '../../helpers/ConvertDateFromISO'
 import { iInfoList } from '../../interfaces/iInfoList'
 import { iNcm } from '../../interfaces/iNcm'
 import styles from './Ncm.module.scss'
 
 export default function Ncm() {
-    const DEFAULT_AMOUNT_TO_SHOW = 20
-    const ADD_AMOUNT_TO_SHOW = 10
+    const UiConstants = UIConstants()
     const [ncmList, setNcmList] = useState<iNcm[]>([])
     const [lastSearch, setLastSearch] = useState<string>('')
     const [selectedNcms, setSelectedNcms] = useState<iNcm[]>([])
     const [connectionError, setConnectionError] = useState<string>('')
-    const [numShow, setNumShow] = useState<number>(DEFAULT_AMOUNT_TO_SHOW)
 
     const infoList:iInfoList[] = [
         {attribute: 'codigo', label: 'CÓDIGO:'},
@@ -56,7 +55,7 @@ export default function Ncm() {
         })
     }
 
-    const searchNcm = (textFilter:string, amountToShow:number = DEFAULT_AMOUNT_TO_SHOW) => {
+    const searchNcm = (textFilter:string, amountToShow:number = UiConstants.DEFAULT_AMOUNT_TO_SHOW) => {
         if(textFilter){
             let filteredList = ncmList.filter((ncm) => ncm.searchWord.includes(textFilter.toUpperCase()))
             if(filteredList.length > amountToShow) filteredList = filteredList.slice(1, amountToShow + 1)
@@ -69,15 +68,8 @@ export default function Ncm() {
     const handleSearch = (textFilter:string) => {
         if(textFilter){
             setLastSearch(textFilter)
-            setNumShow(DEFAULT_AMOUNT_TO_SHOW)
         }
         searchNcm(textFilter)
-    }
-
-    const handleShowMore = () => {
-        let amountToShow = numShow + ADD_AMOUNT_TO_SHOW
-        setNumShow(amountToShow)
-        searchNcm(lastSearch, amountToShow)
     }
 
     useEffect(()=>{
@@ -100,12 +92,8 @@ export default function Ncm() {
                 <h1 className={styles.titulo}>NCM</h1>
 
                 <SearchInputList dataList={ncmList} selectAction={handleSearch} placeHolderTxt='Código ou Descrição do NCM desejado'/>
-                
-                {(selectedNcms.length === 0) && <p>Pesquise o NCM desejado acima...</p>}
-                <section className={styles.display}>
-                    {(selectedNcms.length > 0) && selectedNcms.map(ncm => <DisplayCard key={ncm.codigo} infoList={infoList} payload={ncm}/>)}
-                    {(selectedNcms.length >= DEFAULT_AMOUNT_TO_SHOW) && <button className={styles.showMore} onClick={handleShowMore}>Show More</button>}                    
-                </section>
+
+                <DisplayOutlet infoList={infoList} itemList={selectedNcms} lastSearch={lastSearch} updateFn={searchNcm} placeHolder='Pesquise o NCM desejado acima...'/>
 
             </main>
         )

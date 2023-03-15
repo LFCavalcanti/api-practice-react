@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
-import DisplayCard from '../../components/DisplayCard'
+import DisplayOutlet from '../../components/DisplayOutlet'
 import LoadingData from '../../components/LoadingData'
 import SearchInputList from '../../components/SearchInputList'
+import UIConstants from '../../global/UiConstants'
 import { iBank } from '../../interfaces/iBank'
 import { iInfoList } from '../../interfaces/iInfoList'
 import styles from './Bank.module.scss'
 
 export default function Bank() {
+    const UiConstants = UIConstants()
     const [bankList, setBankList] = useState<iBank[]>([])
+    const [lastSearch, setLastSearch] = useState<string>('')
     const [selectedBanks, setSelectedBanks] = useState<iBank[]>([])
     const [connectionError, setConnectionError] = useState<string>('')
 
@@ -45,13 +48,21 @@ export default function Bank() {
         })
     }
 
-    const searchBank = (textFilter:string) => {
+    const searchBank = (textFilter:string, amountToShow:number = UiConstants.DEFAULT_AMOUNT_TO_SHOW) => {
         if(textFilter){
             let filteredList = bankList.filter((bank) => bank.searchWord.includes(textFilter.toUpperCase()))
+            if(filteredList.length > amountToShow) filteredList = filteredList.slice(1, amountToShow + 1)
             setSelectedBanks(filteredList)
         } else {
             setSelectedBanks([])
         }
+    }
+
+    const handleSearch = (textFilter:string) => {
+        if(textFilter){
+            setLastSearch(textFilter)
+        }
+        searchBank(textFilter)
     }
 
     useEffect(()=>{
@@ -73,12 +84,9 @@ export default function Bank() {
 
                 <h1 className={styles.bank__titulo}>BANCOS</h1>
 
-                <SearchInputList dataList={bankList} selectAction={searchBank} placeHolderTxt={'Código ou Nome do banco'} />
+                <SearchInputList dataList={bankList} selectAction={handleSearch} placeHolderTxt={'Código ou Nome do banco'} />
 
-                {(selectedBanks.length === 0) && <p>Pesquise o banco desejado acima...</p>}
-                <section className={styles.bank__display}>
-                    {(selectedBanks.length > 0) && selectedBanks.map(bank => <DisplayCard key={bank.ispb} infoList={infoList} payload={bank}/>)}
-                </section>
+                <DisplayOutlet infoList={infoList} itemList={selectedBanks} lastSearch={lastSearch} updateFn={searchBank} placeHolder='Pesquise o banco desejado acima...'/>
 
             </main>
         )
