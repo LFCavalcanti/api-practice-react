@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
+import MainTitle from '../../components/MainTitle'
 import SearchInputTxt from '../../components/SearchInputTxt'
 import ConvertDateFromISO from '../../helpers/ConvertDateFromISO'
 import { iCnpj } from '../../interfaces/iCnpj'
@@ -85,7 +86,7 @@ export default function Cnpj() {
     return (
         <main className={styles.cnpj__container}>
 
-            <h1 className={styles.cnpj__titulo}>CNPJ</h1>
+            <MainTitle text="CNPJ" />
 
             <SearchInputTxt placeHolder='Numero do CNPJ que deseja buscar' onClickCallBack={searchCnpj} validationFunc={validateCnpj} />
 

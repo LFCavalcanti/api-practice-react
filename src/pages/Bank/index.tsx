@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import DisplayOutlet from '../../components/DisplayOutlet'
 import LoadingData from '../../components/LoadingData'
+import MainTitle from '../../components/MainTitle'
 import SearchInputList from '../../components/SearchInputList'
 import UIConstants from '../../global/UiConstants'
 import { iBank } from '../../interfaces/iBank'
@@ -82,7 +83,7 @@ export default function Bank() {
         return (
             <main className={styles.bank__container}>
 
-                <h1 className={styles.bank__titulo}>BANCOS</h1>
+                <MainTitle text="BANCOS" />
 
                 <SearchInputList dataList={bankList} selectAction={handleSearch} placeHolderTxt={'Código ou Nome do banco'} />
 

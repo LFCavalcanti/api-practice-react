@@ -1,0 +1,11 @@
+@import "/styleVariables.scss";
+
+.title{
+    color: $color-text;
+    font-family: $font-subtitle;
+    background-color: $color-contrast;
+    font-size: $font-size-title;
+    font-weight: 600;
+    margin: 5px;
+    padding: 5px;
+}

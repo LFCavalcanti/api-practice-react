@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
+import MainTitle from '../../components/MainTitle'
 import SearchInputTxt from '../../components/SearchInputTxt'
 import { iCep } from '../../interfaces/iCep'
 import { iInfoList } from '../../interfaces/iInfoList'
@@ -41,7 +42,7 @@ export default function Cep() {
         
         <main className={styles.cep__container}>
 
-            <h1 className={styles.cep__titulo}>CEP</h1>
+            <MainTitle text="CEP" />
             
             <SearchInputTxt  placeHolder='Numero do CEP que deseja buscar' onClickCallBack={searchCep} validationFunc={validateCep} />
 

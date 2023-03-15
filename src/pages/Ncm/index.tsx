@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import DisplayOutlet from '../../components/DisplayOutlet'
 import LoadingData from '../../components/LoadingData'
+import MainTitle from '../../components/MainTitle'
 import SearchInputList from '../../components/SearchInputList'
 import UIConstants from '../../global/UiConstants'
 import ConvertDateFromISO from '../../helpers/ConvertDateFromISO'
@@ -89,7 +90,7 @@ export default function Ncm() {
         return (
             <main className={styles.container}>
 
-                <h1 className={styles.titulo}>NCM</h1>
+                <MainTitle text="NCM" />
 
                 <SearchInputList dataList={ncmList} selectAction={handleSearch} placeHolderTxt='Código ou Descrição do NCM desejado'/>
 

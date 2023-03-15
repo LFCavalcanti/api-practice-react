@@ -1,10 +1,11 @@
+import MainTitle from '../../components/MainTitle'
 import styles from './HomePage.module.scss'
 import {ReactComponent as Logo} from '/src/assets/logo.svg'
 
 export default function HomePage(){
     return(
         <main className={styles.container}>
-            <h1 className={styles.titulo}>WELCOME!</h1>
+            <MainTitle text="WELCOME!" />
             <section className={styles.information}>
                 <Logo id="logo" className={styles.information__logoProject} />
                 <div className={styles.information__text}>
