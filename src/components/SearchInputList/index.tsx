@@ -3,6 +3,7 @@ import { useRef, useState } from "react"
 import useMonitorClickOnElement from "../../hooks/useMonitorClickOnElement"
 import classNames from 'classnames'
 import useDebounce from '../../hooks/useDebounce'
+import UIConstants from '../../global/UiConstants'
 
 interface iDataItem{
     searchWord: string,
@@ -17,16 +18,16 @@ interface iSearchInputListProps{
 
 export default function SearchInputList({dataList, selectAction, placeHolderTxt}:iSearchInputListProps){
 
+    const UiConstants = UIConstants()
     const [searchFilter, setSearchFilter] = useState<string>('')
     const [searchList, setSearchList] = useState<iDataItem[]>([])
     const dropDownRef = useRef<HTMLDivElement>(null)
     const searchInputRef = useRef<HTMLInputElement>(null)
-    const MAX_LIST_SIZE = 200
 
     const updateFilterList = (text?:string) => {
         if(text){
             let filteredList = dataList.filter((item) => item.searchWord.includes(text.toUpperCase()))
-            if(filteredList.length > MAX_LIST_SIZE) filteredList = filteredList.slice(1, MAX_LIST_SIZE + 1)
+            if(filteredList.length > UiConstants.MAX_LIST_SIZE) filteredList = filteredList.slice(1, UiConstants.MAX_LIST_SIZE + 1)
             setSearchList(filteredList)
         } else {
             setSearchList([])
