@@ -57,7 +57,7 @@ export default function Cep() {
             <section className={styles.cep__display}>
                 {(errorMsg) && <ErrorMessage message={errorMsg} />}
                 {(cepInformation) && <DisplayCard infoList={infoList} payload={cepInformation} />}
-                {(cepInformation?.location.coordinates) &&
+                {(cepInformation?.location.coordinates.latitude && cepInformation?.location.coordinates.longitude) &&
                     <MapFrame
                         longitude={Number(cepInformation.location.coordinates.longitude)}
                         latitude={Number(cepInformation.location.coordinates.latitude)}
