@@ -4,6 +4,7 @@ import { useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
 import ErrorMessage from '../../components/ErrorMessage'
 import MainTitle from '../../components/MainTitle'
+import MapFrame from '../../components/MapFrame'
 import SearchInputTxt from '../../components/SearchInputTxt'
 import { iCep } from '../../interfaces/iCep'
 import { iInfoList } from '../../interfaces/iInfoList'
@@ -56,6 +57,12 @@ export default function Cep() {
             <section className={styles.cep__display}>
                 {(errorMsg) && <ErrorMessage message={errorMsg} />}
                 {(cepInformation) && <DisplayCard infoList={infoList} payload={cepInformation} />}
+                {(cepInformation?.location.coordinates) &&
+                    <MapFrame
+                        longitude={Number(cepInformation.location.coordinates.longitude)}
+                        latitude={Number(cepInformation.location.coordinates.latitude)}
+                        labelTxt={cepInformation.street}
+                    />}
             </section>
         </main>
     )

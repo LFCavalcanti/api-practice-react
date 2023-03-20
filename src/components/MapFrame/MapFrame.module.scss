@@ -1,0 +1,23 @@
+@import "/styleVariables.scss";
+
+.mapContainer{
+    width: 50%;
+    height: 300px;
+    border: 2px solid rgba($color-border-dark, 0.25);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.mapMarker{
+    margin-top: -40px;
+    padding: 5px;
+    background-color: $color-inform;
+    font-family: $font-text;
+    font-size: $font-size-textField;
+    font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+    .mapContainer{
+        width: 100%;
+    }
+}
