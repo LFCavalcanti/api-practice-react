@@ -1,0 +1,28 @@
+@import "/styleVariables.scss";
+
+.messageContainer{
+
+    background-color: $color-error;
+    width: 100%;
+    overflow-wrap: break-word;
+    align-self: self-start;
+
+    h3{
+
+        color: $color-text;
+        font-family: $font-subtitle;
+        font-size: $font-size-label;
+        font-weight: 700;
+        margin: 5px;
+        padding: 5px;
+    }
+
+    p{
+        color: $color-text;
+        font-family: $font-subtitle;
+        font-size: $font-size-textField;
+        font-weight: 500;
+        margin: 5px;
+        padding: 5px;
+    }
+}
