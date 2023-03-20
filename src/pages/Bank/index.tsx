@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import DisplayOutlet from '../../components/DisplayOutlet'
+import ErrorMessage from '../../components/ErrorMessage'
 import LoadingData from '../../components/LoadingData'
 import MainTitle from '../../components/MainTitle'
 import SearchInputList from '../../components/SearchInputList'
@@ -75,7 +76,7 @@ export default function Bank() {
             <>
                 <LoadingData />
                 <div>
-                    {(connectionError) && <p className={styles.errorDisplay}>{connectionError}</p>}
+                    {(connectionError) && <ErrorMessage message={connectionError} />}
                 </div>
             </>
         )

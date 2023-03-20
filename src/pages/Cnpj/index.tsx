@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
+import ErrorMessage from '../../components/ErrorMessage'
 import MainTitle from '../../components/MainTitle'
 import SearchInputTxt from '../../components/SearchInputTxt'
 import ConvertDateFromISO from '../../helpers/ConvertDateFromISO'
@@ -12,6 +13,7 @@ import styles from './Cnpj.module.scss'
 export default function Cnpj() {
 
     const [cnpjInformation, setCnpjInformation] = useState<iCnpj>()
+    const [errorMsg, setErrorMsg] = useState<string>('')
 
     const infoList:iInfoList[] = [
         {attribute: 'cnpj', label: 'CODIGO:'},
@@ -71,8 +73,13 @@ export default function Cnpj() {
                 ddd_telefone_2 : data.ddd_telefone_2
             }
             setCnpjInformation(cnpjInfo)
+            setErrorMsg('')
         })
-        .catch((error)=>console.error(error))
+        .catch((error)=>{
+            const errorMessage = (error.response.data.message) ? error.response.data.message : 'UNKNOWN ERROR MESSAGE'
+            console.error(error)
+            setErrorMsg(`${errorMessage}`)
+        })
     }
 
     const validateCnpj = (cnpj:string) => {
@@ -91,6 +98,7 @@ export default function Cnpj() {
             <SearchInputTxt placeHolder='Numero do CNPJ que deseja buscar' onClickCallBack={searchCnpj} validationFunc={validateCnpj} />
 
             <section className={styles.cnpj__display}>
+                {(errorMsg) && <ErrorMessage message={errorMsg} />}
                 {(cnpjInformation) && <DisplayCard infoList={infoList} payload={cnpjInformation}/>}
             </section>
         </main>

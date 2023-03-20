@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import DisplayCard from '../../components/DisplayCard'
+import ErrorMessage from '../../components/ErrorMessage'
 import MainTitle from '../../components/MainTitle'
 import SearchInputTxt from '../../components/SearchInputTxt'
 import { iCep } from '../../interfaces/iCep'
@@ -11,6 +12,7 @@ import styles from './Cep.module.scss'
 export default function Cep() {
 
     const [cepInformation, setCepInformation] = useState<iCep>()
+    const [errorMsg, setErrorMsg] = useState<string>('')
 
     const infoList:iInfoList[] = [
         {attribute: 'cep', label: 'CODIGO:'},
@@ -26,8 +28,13 @@ export default function Cep() {
         axios.get(`https://brasilapi.com.br/api/cep/v2/${cepToSearch}`)
         .then((response)=>{
             setCepInformation(response.data)
+            setErrorMsg('')
         })
-        .catch((error)=>console.error(error))
+        .catch((error)=>{
+            const errorMessage = (error.response.data.message) ? error.response.data.message : 'UNKNOWN ERROR MESSAGE'
+            console.error(error)
+            setErrorMsg(`${errorMessage}`)
+        })
     }
 
     const validateCep = (cnpj:string) => {
@@ -47,6 +54,7 @@ export default function Cep() {
             <SearchInputTxt  placeHolder='Numero do CEP que deseja buscar' onClickCallBack={searchCep} validationFunc={validateCep} />
 
             <section className={styles.cep__display}>
+                {(errorMsg) && <ErrorMessage message={errorMsg} />}
                 {(cepInformation) && <DisplayCard infoList={infoList} payload={cepInformation} />}
             </section>
         </main>

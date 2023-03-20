@@ -6,28 +6,3 @@
     padding: 10px;
     height: 100%;
 }
-
-.errorDisplay{
-    height: 40px;
-    line-height: 40px;
-    padding: 10px;
-    text-align: center;
-    font-weight: 600;
-    color: $color-text;
-    font-size: $font-size-label;
-    background-color: $color-error;
-}
-
-.showMore{
-    font-weight: 600;
-    font-size: $font-size-btn-primary;
-    color: $color-primary;
-    border: 1px solid $color-primary;
-    padding: 4px;
-    min-width: 50px;
-    background-color: white;
-    &:hover{
-        background-color: $color-primary;
-        color: $color-text-secondary;
-    }
-}
