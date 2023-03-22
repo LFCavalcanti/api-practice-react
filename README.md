@@ -14,8 +14,17 @@ Another choice was to use Vite instead of CRA to learn it's ins and outs.
 ### PROD
 ![react](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react?color=important)
 ![react-dom](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react-dom?color=important)
-![react-dom](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react-router-dom?color=important)
+![react-router-dom](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react-router-dom?color=important)
 ![classnames](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/classnames?color=important)
+![react-tooltip](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react-tooltip?color=important)
+![react-csv-downloader](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/react-csv-downloader?color=important)
+![pdfmake](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/pdfmake?color=important)
+![axios](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/axios?color=important)
+![@react-google-maps/api](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/@react-google-maps/api?color=important)
+![@fortawesome/react-fontawesome](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/@fortawesome/react-fontawesome?color=important)
+![@fortawesome/fontawesome-svg-core](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/@fortawesome/fontawesome-svg-core?color=important)
+![@fortawesome/free-regular-svg-icons](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/@fortawesome/free-regular-svg-icons?color=important)
+![@fortawesome/free-solid-svg-icons](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/@fortawesome/free-solid-svg-icons?color=important)
 
 ### DEV - MAIN PACKAGES
 ![vite](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/dev/vite?color=green)
@@ -35,3 +44,4 @@ Another choice was to use Vite instead of CRA to learn it's ins and outs.
 ![@types/react](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/dev/@types/react?color=blue)
 ![@types/react-dom](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/dev/@types/react-dom?color=blue)
 ![@types/vite-plugin-react-svg](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/dev/@types/vite-plugin-react-svg?color=blue)
+![@types/pdfmake](https://img.shields.io/github/package-json/dependency-version/LFCavalcanti/api-practice-react/dev/@types/pdfmake?color=blue)
