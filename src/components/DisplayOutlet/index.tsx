@@ -6,6 +6,7 @@ import DisplayCard from '../DisplayCard'
 import styles from './DisplayOutlet.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf, faSquarePlus, faPlusSquare } from '@fortawesome/free-regular-svg-icons'
+import DownloadCsv from '../DownloadCsv'
 
 interface IDdisplayOutlet{
     infoList:iInfoList[]
@@ -38,10 +39,11 @@ export default function DisplayOutlet({infoList, itemList, updateFn, placeHolder
                 <section className={styles.display}>
                     <div className={styles.display__exports}>
                         <label>Export results:</label>
-                        <button onClick={()=>CardsPDF({callerName, infoList, itemList})}><FontAwesomeIcon icon={faFilePdf} /> Download PDF</button>
+                        <button onClick={()=>CardsPDF({callerName, infoList, itemList})}><FontAwesomeIcon className="fa-xl" icon={faFilePdf} /> Download PDF</button>
+                        <DownloadCsv {...{infoList, itemList, callerName}}/>
                     </div>
                     {itemList.map(item => <DisplayCard key={item.uniqueId} infoList={infoList} payload={item}/>)}
-                    {(itemList.length >= UiConstants.DEFAULT_AMOUNT_TO_SHOW) && <div className={styles.showMore}><button  onClick={handleShowMore}><FontAwesomeIcon icon={faPlusSquare} /> Show More</button></div>}                    
+                    {(itemList.length >= UiConstants.DEFAULT_AMOUNT_TO_SHOW) && <div className={styles.showMore}><button  onClick={handleShowMore}><FontAwesomeIcon className="fa-xl" icon={faPlusSquare} /> Show More</button></div>}                    
                 </section>
             </>
     
