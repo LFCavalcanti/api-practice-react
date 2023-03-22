@@ -95,7 +95,7 @@ export default function Ncm() {
 
                 <SearchInputList dataList={ncmList} selectAction={handleSearch} placeHolderTxt='Código ou Descrição do NCM desejado'/>
 
-                <DisplayOutlet infoList={infoList} itemList={selectedNcms} lastSearch={lastSearch} updateFn={searchNcm} placeHolder='Pesquise o NCM desejado acima...'/>
+                <DisplayOutlet infoList={infoList} itemList={selectedNcms} lastSearch={lastSearch} updateFn={searchNcm} placeHolder='Pesquise o NCM desejado acima...' callerName='NCM'/>
 
             </main>
         )

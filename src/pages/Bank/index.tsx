@@ -88,7 +88,7 @@ export default function Bank() {
 
                 <SearchInputList dataList={bankList} selectAction={handleSearch} placeHolderTxt={'Código ou Nome do banco'} />
 
-                <DisplayOutlet infoList={infoList} itemList={selectedBanks} lastSearch={lastSearch} updateFn={searchBank} placeHolder='Pesquise o banco desejado acima...'/>
+                <DisplayOutlet infoList={infoList} itemList={selectedBanks} lastSearch={lastSearch} updateFn={searchBank} placeHolder='Pesquise o banco desejado acima...' callerName='BANKS'/>
 
             </main>
         )
